@@ -1,12 +1,12 @@
-<!DOCTYPE html>
 {% load static %}
+<!DOCTYPE html>
 <html lang="ru">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CultureEvents - Организация мероприятий и бронирование билетов</title>
-    <link rel="stylesheet" href="{% static 'style.css' %}"> 
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"> 
 </head>
 
 <body>
@@ -21,13 +21,55 @@
                 <li><a href="#contacts">Контакты</a></li>
             </ul>
             <div class="auth-buttons">
-                <a href="{% url 'login' %}" class="btn btn-outline">Войти</a>
-                <a href="{% url 'registration' %}" class="btn btn-primary">Регистрация</a>
+                {% if user.is_authenticated %}
+                    <span>Добро пожаловать, {{ user.username }}!</span>
+                    <a href="{% url 'logout' %}" class="btn">Выйти</a>
+                {% else %}
+                    <button class="btn" id="loginBtn">Войти</button>
+                    <button class="btn btn-primary" id="registerBtn">Регистрация</button>
+                {% endif %}
             </div>
         </nav>
     </header>
 
-    
+    <!-- Модальное окно входа -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeLogin">&times;</span>
+            <h2>Вход</h2>
+            <form method="post" action="{% url 'login' %}">
+                {% csrf_token %}
+                <div class="form-group">
+                    <input type="text" name="username" placeholder="Имя пользователя" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" name="password" placeholder="Пароль" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Войти</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Модальное окно регистрации -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeRegister">&times;</span>
+            <h2>Регистрация</h2>
+            <form method="post" action="{% url 'register' %}">
+                {% csrf_token %}
+                <div class="form-group">
+                    <input type="text" name="username" placeholder="Имя пользователя" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" name="password1" placeholder="Пароль" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" name="password2" placeholder="Подтверждение пароля" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+            </form>
+        </div>
+    </div>
 
     <section class="hero">
         <div class="hero-content">
@@ -262,5 +304,7 @@
             <p>&copy; 2025 CultureEvents. Все права защищены.</p>
         </div>
     </footer>
+
+    <script src="/static/js/auth.js"></script>
 </body>
 </html>
