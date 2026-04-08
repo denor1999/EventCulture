@@ -1,0 +1,45 @@
+{% load static %}
+
+<style>
+    .categories-list {
+        display: flex;
+        gap: 12px;
+        list-style: none;
+        padding: 0;
+        margin: 15px 0;
+        flex-wrap: wrap;
+    }
+    .categories-list li a {
+        display: block;
+        padding: 8px 20px;
+        background: white;
+        border-radius: 25px;
+        text-decoration: none;
+        color: #333;
+        border: 1px solid #ddd;
+    }
+    .categories-list li.selected a {
+        background: #007bff;
+        color: white;
+        border-color: #007bff;
+    }
+    .badge {
+        font-size: 18px;
+        background: #28a745;
+        color: white;
+        padding: 3px 10px;
+        border-radius: 20px;
+        margin-left: 10px;
+    }
+</style>
+
+<ul class="categories-list">
+    <li {% if cat_selected == 0 %}class="selected"{% endif %}>
+        <a href="{% url 'home' %}">Все категории</a>
+    </li>
+    {% for cat in cats %}
+    <li {% if cat_selected == cat.id %}class="selected"{% endif %}>
+        <a href="{% url 'category' cat.id %}">{{ cat.name }}</a>
+    </li>
+    {% endfor %}
+</ul>

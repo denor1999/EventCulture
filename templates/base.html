@@ -1,0 +1,24 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}CultureEvents{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    {% include 'includes/header.html' %}
+    
+    <main>
+        {% block content %}
+        {% include 'includes/navigation.html' %}
+        {% endblock %}
+    </main>
+    
+    {% include 'includes/footer.html' %}
+    {% include 'includes/modals.html' %}
+    
+    <script src="{% static 'js/auth.js' %}"></script>
+</body>
+</html>

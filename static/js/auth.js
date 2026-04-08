@@ -1,4 +1,3 @@
-// Ждем загрузки DOM
 document.addEventListener('DOMContentLoaded', function() {
     
     const loginModal = document.getElementById('loginModal');

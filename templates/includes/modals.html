@@ -1,0 +1,36 @@
+<div id="loginModal" class="modal">
+    <div class="modal-content">
+        <span class="close" id="closeLogin">&times;</span>
+        <h2>Вход</h2>
+        <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <input type="text" name="username" placeholder="Имя пользователя" required>
+            </div>
+            <div class="form-group">
+                <input type="password" name="password" placeholder="Пароль" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Войти</button>
+        </form>
+    </div>
+</div>
+
+<div id="registerModal" class="modal">
+    <div class="modal-content">
+        <span class="close" id="closeRegister">&times;</span>
+        <h2>Регистрация</h2>
+        <form method="post" action="{% url 'register' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <input type="text" name="username" placeholder="Имя пользователя" required>
+            </div>
+            <div class="form-group">
+                <input type="password" name="password1" placeholder="Пароль" required>
+            </div>
+            <div class="form-group">
+                <input type="password" name="password2" placeholder="Подтверждение пароля" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+        </form>
+    </div>
+</div>

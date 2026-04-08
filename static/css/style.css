@@ -876,3 +876,174 @@ html {
     display: flex;
     gap: 10px;
 }
+
+.categories-section {
+    padding: 40px 0;
+    background: #f8f9fa;
+}
+
+.categories-list {
+    display: flex;
+    gap: 15px;
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.categories-list li a {
+    display: block;
+    padding: 10px 25px;
+    background: white;
+    border-radius: 30px;
+    text-decoration: none;
+    color: #333;
+    transition: all 0.3s;
+    border: 1px solid #ddd;
+}
+
+.categories-list li.selected a {
+    background: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+.categories-list li a:hover {
+    background: #0056b3;
+    color: white;
+}
+
+.badge {
+    font-size: 14px;
+    background: #28a745;
+    color: white;
+    padding: 5px 12px;
+    border-radius: 20px;
+    margin-left: 10px;
+}
+
+.discount-section {
+    background: #fff3cd;
+    padding: 15px;
+    text-align: center;
+    border-radius: 10px;
+    margin: 20px 0;
+}
+
+/* ===== ОРГАНИЗАТОРАМ (простой вариант) ===== */
+.organizers-section {
+    padding: 50px 0;
+    background: #f0f4ff;
+}
+
+.organizers-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    border-radius: 15px;
+    padding: 30px 40px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.organizers-text {
+    flex: 2;
+}
+
+.organizers-text h3 {
+    font-size: 22px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.organizers-text p {
+    color: #666;
+    margin-bottom: 15px;
+}
+
+.simple-benefits {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.simple-benefits li {
+    color: #28a745;
+    font-size: 14px;
+}
+
+.organizers-button {
+    flex: 1;
+    text-align: center;
+}
+
+.btn-light {
+    background: #007bff;
+    color: white;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 30px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-light:hover {
+    background: #0056b3;
+    transform: scale(1.05);
+}
+
+/* ===== О НАС ===== */
+.about-section {
+    padding: 50px 0;
+    background: white;
+}
+
+.about-card {
+    background: #f8f9fa;
+    border-radius: 15px;
+    padding: 40px;
+    text-align: center;
+}
+
+.about-text h3 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.about-text p {
+    color: #666;
+    line-height: 1.6;
+    max-width: 700px;
+    margin: 0 auto 15px auto;
+}
+
+.about-stats {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-number {
+    display: block;
+    font-size: 32px;
+    font-weight: bold;
+    color: #007bff;
+}
+
+.stat-label {
+    font-size: 14px;
+    color: #666;
+}

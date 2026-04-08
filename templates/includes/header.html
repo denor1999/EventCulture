@@ -1,0 +1,23 @@
+{% load static %}
+<header>
+    <nav class="nav-container">
+        <div class="logo">CultureEvents</div>
+        <ul class="nav-links">
+            <li><a href="{% url 'home' %}">Главная</a></li>
+            <li><a href="#events">Мероприятия</a></li>
+            <li><a href="#venues">Площадки</a></li>
+            <li><a href="#organizers">Организаторы</a></li>
+            <li><a href="#about">О нас</a></li>
+            <li><a href="#contacts">Контакты</a></li>
+        </ul>
+        <div class="auth-buttons">
+            {% if user.is_authenticated %}
+                <span>Добро пожаловать, {{ user.username }}!</span>
+                <a href="{% url 'logout' %}" class="btn">Выйти</a>
+            {% else %}
+                <button class="btn" id="loginBtn">Войти</button>
+                <button class="btn btn-primary" id="registerBtn">Регистрация</button>
+            {% endif %}
+        </div>
+    </nav>
+</header>
