@@ -4,11 +4,11 @@
         <div class="logo">CultureEvents</div>
         <ul class="nav-links">
             <li><a href="{% url 'home' %}">Главная</a></li>
-            <li><a href="#events">Мероприятия</a></li>
-            <li><a href="#venues">Площадки</a></li>
-            <li><a href="#organizers">Организаторы</a></li>
-            <li><a href="#about">О нас</a></li>
-            <li><a href="#contacts">Контакты</a></li>
+            <li><a href="{% url 'events' %}">Мероприятия</a></li>
+            <li><a href="{% url 'venues' %}">Площадки</a></li>
+            <li><a href="{% url 'organizers' %}">Организаторы</a></li>
+            <li><a href="{% url 'about' %}">О нас</a></li>
+            <li><a href="{% url 'contacts' %}">Контакты</a></li>
         </ul>
         <div class="auth-buttons">
             {% if user.is_authenticated %}

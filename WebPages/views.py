@@ -71,3 +71,18 @@ def logout_view(request):
     logout(request)
     messages.success(request, 'Вы вышли из системы')
     return redirect('home')
+
+def events_view(request):
+    return render(request, 'events.html')
+
+def venues_view(request):
+    return render(request, 'venues.html')
+
+def organizers_view(request):
+    return render(request, 'organizers.html')
+
+def about_view(request):
+    return render(request, 'about.html')
+
+def contacts_view(request):
+    return render(request, 'contacts.html')

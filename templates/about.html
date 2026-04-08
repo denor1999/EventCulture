@@ -1,0 +1,47 @@
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}CultureEvents - О нас{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+{% include 'includes/header.html' %}
+
+{% block content %}
+<section id="about" class="about-section">
+    <div class="container">
+        <h2 class="section-title">О нас</h2>
+        
+        <div class="about-card">
+            <div class="about-text">
+                <h3>CultureEvents — ваш проводник в мире культуры</h3>
+                <p>Мы создаём мосты между организаторами мероприятий и ценителями искусства. Наша платформа объединяет лучшие культурные события города.</p>
+                <p>С 2020 года мы помогаем людям находить интересные мероприятия, а организаторам — привлекать благодарных зрителей.</p>
+            </div>
+            
+            <div class="about-stats">
+                <div class="stat-item">
+                    <span class="stat-number">1000+</span>
+                    <span class="stat-label">мероприятий</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">50 000+</span>
+                    <span class="stat-label">зрителей</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">50+</span>
+                    <span class="stat-label">площадок</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    {% include 'includes/footer.html' %}
+    {% include 'includes/modals.html' %}
+
+    <script src="{% static 'js/auth.js' %}"></script>
+
+{% endblock %}

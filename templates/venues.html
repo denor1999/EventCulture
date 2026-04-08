@@ -1,0 +1,38 @@
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}CultureEvents - Площадки{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+{% include 'includes/header.html' %}
+
+{% block content %}
+<section id="venues" class="venues-section">
+    <div class="container">
+        <h2 class="section-title">Популярные площадки</h2>
+        <div class="venues-grid">
+            <div class="venue-card">
+                <h3>Казанская филармония</h3>
+                <p>Концертный зал • 800 мест</p>
+            </div>
+            <div class="venue-card">
+                <h3>Галерея современного искусства</h3>
+                <p>Выставочное пространство • 3 зала</p>
+            </div>
+            <div class="venue-card">
+                <h3>Драматический театр</h3>
+                <p>Театральная сцена • 500 мест</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+    {% include 'includes/footer.html' %}
+    {% include 'includes/modals.html' %}
+
+    <script src="{% static 'js/auth.js' %}"></script>
+
+{% endblock %}

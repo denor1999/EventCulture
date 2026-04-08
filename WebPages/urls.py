@@ -7,4 +7,11 @@ urlpatterns = [
     path('register/', views.register_view, name='register'),
     path('logout/', views.logout_view, name='logout'),
     path('category/<int:cat_id>/', views.category_view, name='category'),
+    path('events/', views.events_view, name='events'),
+    path('venues/', views.venues_view, name='venues'),
+    path('organizers/', views.organizers_view, name='organizers'),
+    path('about/', views.about_view, name='about'),
+    path('contacts/', views.contacts_view, name='contacts'),
+
+
 ]

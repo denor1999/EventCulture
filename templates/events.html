@@ -1,0 +1,48 @@
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}CultureEvents - Мероприятия{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+{% include 'includes/header.html' %}
+
+{% block content %}
+<section class="events-section" id="events">
+    <div class="container">
+        <h2 class="section-title">Популярные мероприятия</h2>
+        <div class="events-grid">
+            {% for event in events %}
+            <div class="event-card">
+                <img src="{{ event.image_url }}" alt="{{ event.title }}" class="event-image">
+                <div class="event-info">
+                    <div class="event-date">{{ event.date|date:"d F Y • H:i" }}</div>
+                    <h3 class="event-title">{{ event.title }}</h3>
+                    <p class="event-description">{{ event.venue }}</p>
+                    <p class="event-price">от {{ event.price }} ₽</p>
+                    <button class="btn btn-primary" style="width: 100%;">Забронировать</button>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p>Мероприятия пока не добавлены.</p>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="discount-section">
+    <div class="container">
+        <p> Скидка 10% на первый билет: 
+           900 ₽ вместо 1000 ₽
+        </p>
+    </div>
+</section>
+
+    {% include 'includes/footer.html' %}
+    {% include 'includes/modals.html' %}
+    
+    <script src="{% static 'js/auth.js' %}"></script>
+
+{% endblock %}

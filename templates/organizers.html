@@ -1,0 +1,40 @@
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}CultureEvents - Организаторам{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+{% include 'includes/header.html' %}
+
+{% block content %}
+<section id="organizers" class="organizers-section">
+    <div class="container">
+        <h2 class="section-title">Организаторам мероприятий</h2>
+        
+        <div class="organizers-card">
+            <div class="organizers-text">
+                <h3>Разместите ваше мероприятие на CultureEvents</h3>
+                <p>Привлекайте больше зрителей и увеличивайте продажи билетов с помощью нашей платформы.</p>
+                <ul class="simple-benefits">
+                    <li>✓ Бесплатное размещение</li>
+                    <li>✓ Удобная система бронирования</li>
+                    <li>✓ Поддержка 24/7</li>
+                </ul>
+            </div>
+            
+            <div class="organizers-button">
+                <button class="btn btn-light" id="organizerBtn">Стать организатором</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+    {% include 'includes/footer.html' %}
+    {% include 'includes/modals.html' %}
+
+    <script src="{% static 'js/auth.js' %}"></script>
+
+{% endblock %}
