@@ -10,16 +10,18 @@
 {% include 'includes/header.html' %}
 
 {% block content %}
-<div class="container">
-    <h2 class="section-title">Контакты</h2>
-    <p>+7 (495) 123-45-67</p>
-    <p>info@cultureevents.ru</p>
-    <p>Казань, ул. Карла Маркса, 72</p>
-</div>
+<section class="contacts-section">
+    <div class="container">
+        <h2 class="section-title">Контакты</h2>
+        <p>+7 (495) 123-45-67</p>
+        <p>info@cultureevents.ru</p>
+        <p>Казань, ул. Карла Маркса, 72</p>
+    </div>
+</section>
 
-    {% include 'includes/footer.html' %}
-    {% include 'includes/modals.html' %}
+{% include 'includes/footer.html' %}
+{% include 'includes/modals.html' %}
 
-    <script src="{% static 'js/auth.js' %}"></script>
+<script src="{% static 'js/auth.js' %}"></script>
 
 {% endblock %}

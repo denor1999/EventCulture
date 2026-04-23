@@ -9,6 +9,7 @@ body {
     line-height: 1.6;
     color: #333;
     background-color: #f8f9fa;
+    padding-top: 80px;
 }
 
 /* Header Styles */
@@ -103,7 +104,6 @@ header {
     justify-content: center;
     text-align: center;
     color: white;
-    margin-top: 80px;
     padding: 0 2rem;
 }
 
@@ -145,7 +145,6 @@ header {
 }
 
 .events-section {
-    padding: 4rem 2rem;
     max-width: 1200px;
     margin: 0 auto;
 }
@@ -326,7 +325,6 @@ footer {
 }
 
 .venues-section {
-    padding: 6rem 2rem;
     max-width: 1200px;
     margin: 0 auto;
     background: linear-gradient(135deg, #FAFBFC 0%, #F7FAFC 100%);
@@ -382,7 +380,7 @@ footer {
 }
 
 .organizers-section {
-    padding: 6rem 2rem;
+    padding: 4rem 2rem;
     max-width: 1200px;
     margin: 0 auto;
     background: white;
@@ -449,7 +447,6 @@ footer {
 }
 
 .about-section {
-    padding: 6rem 2rem;
     max-width: 1200px;
     margin: 0 auto;
     background: linear-gradient(135deg, #FAFBFC 0%, #F7FAFC 100%);
@@ -509,7 +506,7 @@ footer {
 }
 
 .contacts-section {
-    padding: 6rem 2rem;
+    padding: 4rem 2rem;
     max-width: 1200px;
     margin: 0 auto;
     background: white;
@@ -688,7 +685,7 @@ html {
 }
 
 .benefits-section {
-    padding: 6rem 2rem;
+    padding: 4rem 2rem;
     max-width: 1200px;
     margin: 0 auto;
     background: linear-gradient(135deg, #FAFBFC 0%, #F7FAFC 100%);
@@ -933,7 +930,6 @@ html {
 
 /* ===== ОРГАНИЗАТОРАМ (простой вариант) ===== */
 .organizers-section {
-    padding: 50px 0;
     background: #f0f4ff;
 }
 
@@ -1046,4 +1042,51 @@ html {
 .stat-label {
     font-size: 14px;
     color: #666;
+}
+
+/* Выравнивание отступов у всех секций */
+.events-section,
+.venues-section,
+.organizers-section,
+.about-section,
+.contacts-section,
+.benefits-section {
+    padding: 4rem 2rem !important;
+}
+
+/* Убираем двойной отступ у первого элемента после header */
+body > section:first-of-type,
+body > div:first-of-type {
+    margin-top: 0 !important;
+    padding-top: 2rem !important;
+}
+
+/* Фикс для страницы контактов */
+.contacts-section .container:first-child {
+    margin-top: 0;
+    padding-top: 0;
+}
+
+.event-tags {
+    margin: 10px 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+}
+
+.tag {
+    display: inline-block;
+    padding: 4px 12px;
+    background: #e9ecef;
+    color: #007bff;
+    border-radius: 20px;
+    font-size: 12px;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.tag:hover {
+    background: #007bff;
+    color: white;
 }

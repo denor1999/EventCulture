@@ -1,44 +1,44 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
+from django.http import HttpResponseNotFound, HttpResponseServerError
+from .models import Event, Category, Tag
 
-EVENTS = [
-    {
-        'id': 1,
-        'title': 'Симфонический оркестр: Шедевры классики',
-        'venue': 'Казанская филармония',
-        'date': '2024-12-15',
-        'image_url': 'https://images.unsplash.com/photo-1506157786151-b8491531f063',
-        'price' : 1500,
-    },
-    
-    {
-        'id': 2,
-        'title': 'Ромео и Джульетта',
-        'venue': 'Драматический театр',
-        'date': '2024-12-20',
-        'image_url': 'https://images.unsplash.com/photo-1588200980342-23b585c03e26',
-        'price' : 2000,
-    },
-]
+def page_not_found(request, exception):
+    return HttpResponseNotFound("<h1>Страница не найдена</h1>")
+
+def server_error(request):
+    return HttpResponseServerError("<h1>Ошибка 500</h1><p>Внутренняя ошибка сервера</p>")
 
 def index(request):
-    context = {
-        'events': EVENTS,
-        'title': 'Главная страница',
-        'cat_selected' : 0,
-    }
-    return render(request, 'index.html', context)
+    return render(request, 'index.html')
 
-def category_view(request, cat_id):
+def category_view(request, cat_slug):    
+    category = get_object_or_404(Category, slug=cat_slug)
+    
+    events = Event.published.filter(cat=category).order_by('-date')
+    
     context = {
-        'events': EVENTS,
-        'title': f'Категория {cat_id}',
-        'cat_selected': cat_id,
+        'title': f'Категория: {category.name}',
+        'events': events,
+        'category': category,
+        'events_count': events.count(),
     }
-    return render(request, 'index.html', context)
+    return render(request, 'events.html', context)
+
+def tag_view(request, tag_slug):
+    tag = get_object_or_404(Tag, slug=tag_slug)
+    events = Event.published.filter(tags=tag).order_by('-date')
+    
+    context = {
+        'title': f'Тег: {tag.name}',
+        'events': events,
+        'tag': tag,
+        'events_count': events.count(),
+    }
+    return render(request, 'events.html', context)
 
 def login_view(request):
     if request.method == 'POST':
@@ -73,7 +73,22 @@ def logout_view(request):
     return redirect('home')
 
 def events_view(request):
-    return render(request, 'events.html')
+    events = Event.published.all().order_by('-date')
+    context = {
+        'events': events,           
+        'title': 'Мероприятия', 
+        'events_count': events.count(), 
+    }
+    return render(request, 'events.html', context)
+
+def event_detail(request, event_slug):
+    event = get_object_or_404(Event, slug=event_slug)
+    
+    context = {
+        'event': event,
+        'title': event.title,
+    }
+    return render(request, 'webpages/event_deatail.html', context)
 
 def venues_view(request):
     return render(request, 'venues.html')

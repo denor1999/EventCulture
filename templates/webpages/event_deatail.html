@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ event.title }} | CultureEvents{% endblock %}
+
+{% block content %}
+<section class="event-detail">
+    <div class="container">
+        <a href="{% url 'home' %}" class="back-link">Назад к мероприятиям</a>
+        
+        <div class="event-header">
+            <h1>{{ event.title }}</h1>
+
+            <p class="event-category">
+                Категория: <a href="{{ event.cat.get_absolute_url }}">{{ event.cat.name }}</a>
+            </p>
+
+            <div class="event-tags">
+                <span>Теги:</span>
+                {% for tag in event.tags.all %}
+                <a href="{{ tag.get_absolute_url }}" class="tag">{{ tag.name }}</a>
+                {% endfor %}
+            </div>
+
+            <div class="event-meta">
+                <span class="event-venue">{{ event.venue }}</span>
+                <span class="event-date">{{ event.date|date:"d E Y • H:i" }}</span>
+                <span class="event-price">от {{ event.price }} ₽</span>
+            </div>
+        </div>
+        
+        {% if event.image_url %}
+        <div class="event-image">
+            <img src="{{ event.image_url }}" alt="{{ event.title }}">
+        </div>
+        {% endif %}
+        
+        <div class="event-description">
+            <h3>Описание мероприятия</h3>
+            <p>{{ event.description|linebreaks }}</p>
+        </div>
+        
+        <div class="event-address">
+            <h3>Адрес площадки</h3>
+            <p>{{ event.address }}</p>
+        </div>
+        
+        <button class="btn btn-primary book-btn">Забронировать билет</button>
+    </div>
+</section>
+{% endblock %}

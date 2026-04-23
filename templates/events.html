@@ -16,19 +16,53 @@
         <div class="events-grid">
             {% for event in events %}
             <div class="event-card">
+                {% if event.image_url %}
                 <img src="{{ event.image_url }}" alt="{{ event.title }}" class="event-image">
-                <div class="event-info">
-                    <div class="event-date">{{ event.date|date:"d F Y • H:i" }}</div>
+                {% else %}
+                <div class="event-image-placeholder">Нет фото</div>
+                {% endif %}
+                
+                <div class="event-info">                    
                     <h3 class="event-title">{{ event.title }}</h3>
-                    <p class="event-description">{{ event.venue }}</p>
-                    <p class="event-price">от {{ event.price }} ₽</p>
-                    <button class="btn btn-primary" style="width: 100%;">Забронировать</button>
+
+                    <p class="event-category">{{ event.cat.name }}</p>
+
+                    <div class="event-tags">
+                        {% for tag in event.tags.all %}
+                        <a href="{{ tag.get_absolute_url }}" class="tag">{{ tag.name }}</a>
+                        {% endfor %}
+                    </div>
+                                        
+                    <p class="event-description">{{ event.description|truncatewords:20 }}</p>
+                    
+                    <p class="event-venue"> {{ event.venue }}</p>
+                    
+                    <p class="event-address"> {{ event.address }}</p>
+                    
+                    <div class="event-date"> {{ event.date|date:"d F Y • H:i" }}</div>
+                    
+                    <p class="event-price"> от {{ event.price }} ₽</p>
+                    
+                    <div class="event-timestamps">
+                        <small>Создано: {{ event.time_create|date:"d.m.Y H:i" }}</small>
+                        <small>Обновлено: {{ event.time_update|date:"d.m.Y H:i" }}</small>
+                    </div>
+
+                    <div class="event-status">
+                        {% if event.is_published %}
+                        <span class="status-published">Опубликовано</span>
+                        {% else %}
+                        <span class="status-draft">Черновик</span>
+                        {% endif %}
+                    </div>
+                    <a href="{{ event.get_absolute_url }}" class="btn btn-primary" style="width: 100%; text-align: center; text-decoration: none;">Подробнее</a>
                 </div>
             </div>
-        </div>
-        {% empty %}
-        <p>Мероприятия пока не добавлены.</p>
-        {% endfor %}
+            {% empty %}
+            <div class="empty-message">
+                <p>Мероприятий пока нет.</p>
+            </div>
+            {% endfor %}
     </div>
 </section>
 
