@@ -1,29 +1,38 @@
+{% load static %}
+
 <footer>
-    <div class="footer-content">
-        <h3>CultureEvents</h3>
-        <p>Ваш проводник в мире культуры и искусства</p>
+    <div class="footer-container">
+        <div class="footer-section">
+            <h3>CultureEvents</h3>
+            <p>Ваш проводник в мире<br>культуры и искусства</p>
+        </div>
+
+        <div class="footer-section">
+            <h3>Мероприятия</h3>
+            <p><a href="{% url 'events' %}">Все мероприятия</a></p>
+            <p><a href="{% url 'category' 'concerts' %}">Концерты</a></p>
+            <p><a href="{% url 'category' 'theaters' %}">Театры</a></p>
+            <p><a href="{% url 'category' 'exhibitions' %}">Выставки</a></p>
+            <p><a href="{% url 'category' 'festivals' %}">Фестивали</a></p>
+        </div>
+
+        <div class="footer-section">
+            <h3>Помощь</h3>
+            <p><a href="{% url 'about' %}">О нас</a></p>
+            <p><a href="{% url 'contacts' %}">Контакты</a></p>
+            <p><a href="#">Как забронировать</a></p>
+            <p><a href="#">Возврат билетов</a></p>
+            <p><a href="#">Вопросы и ответы</a></p>
+        </div>
+
+        <div class="footer-section">
+            <h3>Контакты</h3>
+            <p>📞 +7 (495) 123-45-67</a></p>
+            <p>✉️ info@cultureevents.ru</a></p>
+            <p>📍 Казань, ул. Карла Маркса, 72</p>
+        </div>
     </div>
-    <div class="footer-section">
-        <h3>Мероприятия</h3>
-        <a href="#events">Концерты</a>
-        <a href="#events">Театры</a>
-        <a href="#events">Выставки</a>
-        <a href="#events">Фестивали</a>
-    </div>
-    <div class="footer-section">
-        <h3>Помощь</h3>
-        <a href="#contacts">Как забронировать</a>
-        <a href="#contacts">Возврат билетов</a>
-        <a href="#contacts">Вопросы и ответы</a>
-        <a href="#contacts">Контакты</a>
-    </div>
-    <div class="footer-section">
-        <h3>Контакты</h3>
-        <p>+7 (495) 123-45-67</p>
-        <p>Ожгихин Иван</p>
-        <p>info@cultureevents.ru</p>
-        <p>Казань, ул. Карла Маркса, 72</p>
-    </div>
+
     <div class="footer-bottom">
         <p>&copy; 2025 CultureEvents. Все права защищены.</p>
     </div>

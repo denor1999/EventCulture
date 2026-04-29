@@ -1,3 +1,5 @@
+import urllib.request
+from django.core.files import File
 from django.db import models
 from django.urls import reverse
 
@@ -67,6 +69,19 @@ class Event(models.Model):
             models.Index(fields=['date']),
             models.Index(fields=['slug']),
         ]
+
+    def download_image_from_url(self):
+        if self.image_url and not self.image:
+            try:
+                response = urllib.request.urlopen(self.image_url)
+                file_name = f"event_{self.id}.jpg"
+                self.image.save(file_name, File(response))
+                self.save()
+                return True
+            except Exception as e:
+                print(f"Ошибка: {e}")
+                return False
+        return False    
     
     def __str__(self):
         return self.title

@@ -17,7 +17,7 @@
             {% for event in events %}
             <div class="event-card">
                 {% if event.image_url %}
-                <img src="{{ event.image_url }}" alt="{{ event.title }}" class="event-image">
+                <img src="{{ event.image_url }}">
                 {% else %}
                 <div class="event-image-placeholder">Нет фото</div>
                 {% endif %}
