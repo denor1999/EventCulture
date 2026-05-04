@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Карта площадок | CultureEvents{% endblock %}
+
+{% block content %}
+<section class="map-section" style="padding-top: 30px;"">
+    <div class="container">
+        <h3 class="section-title">Наши площадки</h3>
+        <p>Казань, ул. Карла Маркса, 72 — главный офис CultureEvents</p>
+        
+        <div id="map" style="width: 100%; height: 450px; border-radius: 15px;"></div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://api-maps.yandex.ru/2.1/?apikey=7f1733a6-5d70-4d7c-a04a-377f72f21868&lang=ru_RU"></script>
+
+<script>
+    function init() {
+        var coords = [55.794381, 49.141215];
+        
+        var myMap = new ymaps.Map("map", {
+            center: coords,
+            zoom: 17,
+            controls: ['zoomControl', 'fullscreenControl']
+        });
+        
+        var myPlacemark = new ymaps.Placemark(coords, {
+            balloonContentHeader: '<strong>CultureEvents</strong>',
+            balloonContentBody: 'главный офис<br>ул. Карла Маркса, 72<br>Казань',
+            balloonContentFooter: '<a href="https://maps.yandex.ru/?text=Казань, ул. Карла Маркса, 72" target="_blank">Открыть в Яндекс.Картах</a>',
+            hintContent: 'CultureEvents — главный офис'
+        }, {
+            preset: 'islands#redIcon',
+            iconColor: '#e94560'
+        });
+        
+        myMap.geoObjects.add(myPlacemark);
+    }
+    
+    ymaps.ready(init);
+</script>
+{% endblock %}

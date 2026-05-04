@@ -16,8 +16,10 @@
         <div class="events-grid">
             {% for event in events %}
             <div class="event-card">
-                {% if event.image_url %}
-                <img src="{{ event.image_url }}">
+                {% if event.image %}
+                <img src="{{ event.image.url }}" alt="{{ event.title }}" class="event-image">
+                {% elif event.image_url %}
+                <img src="{{ event.image_url }}" alt="{{ event.title }}" class="event-image">
                 {% else %}
                 <div class="event-image-placeholder">Нет фото</div>
                 {% endif %}
@@ -35,13 +37,13 @@
                                         
                     <p class="event-description">{{ event.description|truncatewords:20 }}</p>
                     
-                    <p class="event-venue"> {{ event.venue }}</p>
+                    <p class="event-venue">{{ event.venue }}</p>
                     
-                    <p class="event-address"> {{ event.address }}</p>
+                    <p class="event-address">{{ event.address }}</p>
                     
-                    <div class="event-date"> {{ event.date|date:"d F Y • H:i" }}</div>
+                    <div class="event-date">{{ event.date|date:"d F Y • H:i" }}</div>
                     
-                    <p class="event-price"> от {{ event.price }} ₽</p>
+                    <p class="event-price">от {{ event.price }} ₽</p>
                     
                     <div class="event-timestamps">
                         <small>Создано: {{ event.time_create|date:"d.m.Y H:i" }}</small>
@@ -63,20 +65,19 @@
                 <p>Мероприятий пока нет.</p>
             </div>
             {% endfor %}
+        </div>
     </div>
 </section>
 
 <section class="discount-section">
     <div class="container">
-        <p> Скидка 10% на первый билет: 
-           900 ₽ вместо 1000 ₽
-        </p>
+        <p>Скидка 10% на первый билет: 900 ₽ вместо 1000 ₽</p>
     </div>
 </section>
 
-    {% include 'includes/footer.html' %}
-    {% include 'includes/modals.html' %}
-    
-    <script src="{% static 'js/auth.js' %}"></script>
+{% include 'includes/footer.html' %}
+{% include 'includes/modals.html' %}
+
+<script src="{% static 'js/auth.js' %}"></script>
 
 {% endblock %}

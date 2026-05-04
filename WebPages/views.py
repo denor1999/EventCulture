@@ -5,6 +5,11 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.http import HttpResponseNotFound, HttpResponseServerError
 from .models import Event, Category, Tag
+from .forms import EventModelForm
+from .openrouter_gpt import ask_openrouter
+from django.views.decorators.csrf import csrf_exempt
+from django.http import JsonResponse
+import json
 
 def page_not_found(request, exception):
     return HttpResponseNotFound("<h1>Страница не найдена</h1>")
@@ -101,3 +106,69 @@ def about_view(request):
 
 def contacts_view(request):
     return render(request, 'contacts.html')
+
+def add_event(request):
+    
+    if request.method == 'POST':
+        form = EventModelForm(request.POST, request.FILES)
+        
+        if form.is_valid():
+            event = form.save()  # 👈 Одна команда вместо ручного создания
+            messages.success(request, f'Мероприятие "{event.title}" успешно добавлено!')
+            return redirect('event_detail', event_slug=event.slug)
+        else:
+            messages.error(request, 'Пожалуйста, исправьте ошибки в форме.')
+    else:
+        form = EventModelForm()
+    
+    return render(request, 'add_event.html', {
+        'title': 'Добавить мероприятие',
+        'form': form
+    })
+
+def edit_event(request, event_slug):
+    event = get_object_or_404(Event, slug=event_slug)
+    
+    if request.method == 'POST':
+        form = EventModelForm(request.POST, request.FILES)
+        
+        if form.is_valid():
+            form.save()
+            messages.success(request, f'Мероприятие "{event.title}" успешно обновлено!')
+            return redirect('event_detail', event_slug=event.slug)
+        else:
+            messages.error(request, 'Пожалуйста, исправьте ошибки в форме.')
+    else:
+        form = EventModelForm(instance=event)
+    
+    return render(request, 'add_event.html', {
+        'title': f'Редактирование: {event.title}',
+        'form': form,
+        'is_edit': True,
+        'event': event
+    })
+
+def map_view(request):
+    return render(request, 'map.html', {'title': 'Карта площадок'})
+
+@csrf_exempt
+def gpt_chat(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            question = data.get('question', '')
+            
+            if not question:
+                return JsonResponse({'error': 'Введите вопрос'}, status=400)
+            
+            answer = ask_openrouter(question)
+            return JsonResponse({'answer': answer})
+            
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)
+    
+    return JsonResponse({'error': 'Метод не разрешён'}, status=405)
+
+
+def gpt_page(request):
+    return render(request, 'gpt.html', {'title': 'AI-помощник'})

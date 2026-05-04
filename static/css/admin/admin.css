@@ -1,23 +1,117 @@
 #header {
-    background: #2c3e50;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 
 #branding h1, #branding h1 a {
-    color: white;
-}
-
-.module h2, .module caption, .inline-group h2 {
-    background: #34495e;
+    color: white !important;
+    font-weight: bold !important;
 }
 
 div.breadcrumbs {
-    background: #2980b9;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white !important;
+}
+
+div.breadcrumbs a {
+    color: #ecf0f1 !important;
+}
+
+.module h2, .module caption, .inline-group h2 {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white !important;
 }
 
 .button, input[type=submit], input[type=button], .submit-row input, a.button {
-    background: #27ae60;
+    background: #9822ca !important;
+    color: white !important;
+    border-radius: 5px !important;
+    border: none !important;
+    padding: 8px 16px !important;
 }
 
 .button:hover, input[type=submit]:hover, input[type=button]:hover {
-    background: #219a52;
+    background: #9822ca !important;
+    cursor: pointer !important;
+}
+
+.deletelink {
+    background: #e74c3c !important;
+    color: white !important;
+}
+
+.deletelink:hover {
+    background: #c0392b !important;
+}
+
+#changelist table thead th {
+    background: #f8f9fa !important;
+    color: #9822ca !important;
+}
+
+.row1 {
+    background: #9822ca !important;
+}
+
+.row2 {
+    background: #9822ca !important;
+}
+
+.paginator {
+    background: #ecf0f1 !important;
+    border-radius: 10px !important;
+    padding: 8px 15px !important;
+}
+
+.aligned label {
+    font-weight: bold !important;
+    color: #9822ca !important;
+}
+
+.messagelist li.success {
+    background: #27ae60 !important;
+    color: white !important;
+}
+
+.messagelist li.error {
+    background: #e74c3c !important;
+    color: white !important;
+}
+
+.messagelist li.warning {
+    background: #f39c12 !important;
+    color: white !important;
+}
+
+#changelist-filter {
+    background: #f8f9fa !important;
+    border-radius: 10px !important;
+}
+
+#changelist-filter h2 {
+    background: #9822ca !important;
+    color: white !important;
+}
+
+.calendar td a, .timelist a {
+    color: #9822ca !important;
+}
+
+.calendar td a:hover, .timelist a:hover {
+    color: #9822ca !important;
+}
+
+#searchbar {
+    border-radius: 20px !important;
+    padding: 8px 15px !important;
+    border: 1px solid #bdc3c7 !important;
+}
+
+@media (max-width: 768px) {
+    #header {
+        padding: 10px !important;
+    }
+    
+    .module {
+        margin: 10px !important;
+    }
 }

@@ -15,9 +15,11 @@
         {% endblock %}
     </main>
     
-    {% include 'includes/footer.html' %}
     {% include 'includes/modals.html' %}
     
     <script src="{% static 'js/auth.js' %}"></script>
+    {% block extra_js %}{% endblock %}
+
+    {% include 'includes/footer.html' %}
 </body>
 </html>

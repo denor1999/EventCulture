@@ -9,10 +9,12 @@
             <li><a href="{% url 'organizers' %}">Организаторам</a></li>
             <li><a href="{% url 'about' %}">О нас</a></li>
             <li><a href="{% url 'contacts' %}">Контакты</a></li>
+            <li><a href="{% url 'map' %}">Карта</a></li>
+            <li><a href="{% url 'gpt_page' %}">AI-помощник</a></li>
         </ul>
         <div class="auth-buttons">
             {% if user.is_authenticated %}
-                <span>Добро пожаловать, {{ user.username }}!</span>
+                <a href="{% url 'add_event' %}" class="btn">Добавить мероприятие</a>
                 <a href="{% url 'logout' %}" class="btn">Выйти</a>
             {% else %}
                 <button class="btn" id="loginBtn">Войти</button>

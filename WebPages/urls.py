@@ -16,7 +16,11 @@ urlpatterns = [
     path('contacts/', views.contacts_view, name='contacts'),
     path('Error404/', views.page_not_found),
     path('Error500/', views.server_error),
-
+    path('add/', views.add_event, name='add_event'),
+    path('edit/<slug:event_slug>/', views.edit_event, name='edit_event'),
+    path('map/', views.map_view, name='map'),
+    path('gpt/', views.gpt_page, name='gpt_page'),
+    path('gpt-chat/', views.gpt_chat, name='gpt_chat'),
 ]
 
 handler404 = views.page_not_found

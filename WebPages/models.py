@@ -33,7 +33,12 @@ class Event(models.Model):
     date = models.DateTimeField(verbose_name="Дата и время")
     price = models.DecimalField(max_digits=10, decimal_places=2, default=0, verbose_name="Цена")
     image_url = models.URLField(blank=True, verbose_name="Ссылка на изображение")
-    image = models.ImageField(upload_to='events/', blank=True, null=True, verbose_name="Изображение")
+    image = models.ImageField(
+        upload_to='events/%Y/%m/%d/',
+        blank=True,
+        null=True,
+        verbose_name="Изображение мероприятия"
+    )
     
     time_create = models.DateTimeField(auto_now_add=True, verbose_name="Время создания")
     time_update = models.DateTimeField(auto_now=True, verbose_name="Время обновления")

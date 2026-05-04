@@ -1,10 +1,11 @@
 from django.contrib import admin
 from django.contrib import messages
+from django.utils.html import format_html
 from .models import Event, Category, Tag
 
 @admin.register(Event)
 class EventAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title', 'cat', 'date', 'price', 'is_published')
+    list_display = ('id', 'title', 'cat', 'date', 'price', 'image_preview', 'is_published')
     list_display_links = ('id', 'title')
     list_editable = ('is_published',)
     ordering = ('-date', 'title')
@@ -13,7 +14,21 @@ class EventAdmin(admin.ModelAdmin):
     search_fields = ['title', 'cat__name', 'venue']
     list_filter = ['is_published', 'cat', 'date']
 
-    fields = ['title', 'slug', 'cat', 'tags', 'venue', 'address', 'date', 'price', 'description', 'image_url', 'is_published']
+    fields = ['title', 'slug', 'cat', 'tags', 'venue', 'address', 'date', 'price', 'description', 'image', 'image_url', 'is_published']
+
+    def image_preview(self, obj):
+        if obj.image:
+            return format_html(
+                '<img src="{}" width="50" height="50" style="border-radius: 5px; object-fit: cover;" />',
+                obj.image.url
+            )
+        if obj.image_url:
+            return format_html(
+                '<img src="{}" width="50" height="50" style="border-radius: 5px; object-fit: cover;" />',
+                obj.image_url
+            )
+        return "Без фото"   
+    image_preview.short_description = "Превью"
         
     prepopulated_fields = {'slug': ('title',)}
     

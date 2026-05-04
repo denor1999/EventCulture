@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}AI-помощник | CultureEvents{% endblock %}
+
+{% block content %}
+<section class="gpt-section" style="padding-top: 30px;">
+    <div class="container">
+        <h1 class="section-title">AI-помощник</h1>
+        <p>Задайте вопрос о мероприятиях, билетах или площадках</p>
+        
+        <div class="chat-container">
+            <div class="chat-messages" id="chatMessages">
+                <div class="message bot">
+                    Привет! Я AI-помощник CultureEvents. Чем могу помочь?
+                </div>
+            </div>
+            
+            <div class="chat-input">
+                <input type="text" id="question" placeholder="Напишите ваш вопрос..." class="form-control">
+                <button id="sendBtn" class="btn btn-primary">Отправить</button>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    const messagesDiv = document.getElementById('chatMessages');
+    const questionInput = document.getElementById('question');
+    const sendBtn = document.getElementById('sendBtn');
+    
+    function addMessage(text, isBot = true) {
+        const msgDiv = document.createElement('div');
+        msgDiv.className = `message ${isBot ? 'bot' : 'user'}`;
+        msgDiv.textContent = text;
+        messagesDiv.appendChild(msgDiv);
+        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+    }
+    
+    async function sendQuestion() {
+        const question = questionInput.value.trim();
+        if (!question) return;
+        
+        addMessage(question, false);
+        questionInput.value = '';
+        
+        addMessage('Думаю...', true);
+        const loadingMsg = messagesDiv.lastChild;
+        
+        try {
+            const response = await fetch('/gpt-chat/', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({question: question})
+            });
+            
+            const data = await response.json();
+            messagesDiv.removeChild(loadingMsg);
+            
+            if (data.answer) {
+                addMessage(data.answer, true);
+            } else if (data.error) {
+                addMessage(`Ошибка: ${data.error}`, true);
+            }
+        } catch (error) {
+            messagesDiv.removeChild(loadingMsg);
+            addMessage('Ошибка соединения. Попробуйте позже.', true);
+        }
+    }
+    
+    sendBtn.addEventListener('click', sendQuestion);
+    questionInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') sendQuestion();
+    });
+</script>
+
+<style>
+    .chat-input input {
+        flex: 1 !important;
+        padding: 14px 20px !important;
+        border: 2px solid #000000 !important;
+        border-radius: 30px !important;
+        font-size: 15px !important;
+    }
+    .chat-input input:focus {
+        border-color: #000000 !important;
+        box-shadow: 0 0 0 3px rgba(233, 69, 96, 0.2) !important;
+        outline: none !important;
+    }
+    html, body {
+        height: 100%;
+
+    }
+    body {
+        display: flex;
+        flex-direction: column;
+    }
+    main {
+        flex: 1;
+    }
+    footer {
+        background: #2c3e50;
+        color: #ecf0f1;
+        padding: 40px 20px 20px;
+        margin-top: auto;
+    }
+</style>
+{% endblock %}

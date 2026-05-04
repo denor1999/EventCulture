@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<section class="add-event">
+    <div class="container">
+        <div class="page-header">
+            <h1>{{ title }}</h1>
+            {% if is_edit %}
+            <a href="{% url 'event_detail' event.slug %}" class="btn btn-secondary">← Назад к мероприятию</a>
+            {% endif %}
+        </div>
+        
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            <div class="form-error">{{ form.non_field_errors }}</div>
+            
+            {% for field in form %}
+            <div class="form-group">
+                <label for="{{ field.id_for_label }}">{{ field.label }}:</label>
+                {{ field }}
+                {% if field.errors %}
+                <div class="form-error">
+                    {{ field.errors }}
+                </div>
+                {% endif %}
+                {% if field.help_text %}
+                <small class="form-help">{{ field.help_text }}</small>
+                {% endif %}
+            </div>
+            {% endfor %}
+            
+            <div class="form-buttons">
+                <button type="submit" class="btn btn-primary">
+                    {% if is_edit %}Сохранить изменения{% else %}Добавить мероприятие{% endif %}
+                </button>
+                <a href="{% url 'events' %}" class="btn btn-secondary">Отмена</a>
+            </div>
+        </form>
+        
+        {% if messages %}
+            {% for message in messages %}
+            <div class="alert {{ message.tags }}">
+                {{ message }}
+            </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+</section>
+{% endblock %}
